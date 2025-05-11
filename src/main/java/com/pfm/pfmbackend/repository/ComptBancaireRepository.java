@@ -13,6 +13,7 @@ import java.util.Optional;
 @Repository
 public interface ComptBancaireRepository extends JpaRepository<ComptBancaire, Long> {
     List<ComptBancaire> findByUtilisateur(Utilisateur utilisateur);
+    Optional<ComptBancaire> findFirstByUtilisateur(Utilisateur utilisateur);
 
     @Query("SELECT MAX(c.id) FROM ComptBancaire c")
     Optional<Long> findMaxId();
