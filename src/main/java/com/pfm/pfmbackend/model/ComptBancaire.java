@@ -28,8 +28,6 @@ public class ComptBancaire {
 
     private String dateOuverture;
 
-    @Column(unique = true)
-    private String ageNcpHash;
 
     @OneToMany(mappedBy = "compteBancaire", cascade = CascadeType.ALL)
     private List<Transaction> transactions;
@@ -39,14 +37,14 @@ public class ComptBancaire {
     public ComptBancaire() {}
 
     // Constructeur avec arguments
-    public ComptBancaire(Long id, String iban, Double solde, String devise, Utilisateur utilisateur, String dateOuverture, String ageNcpHash, List<Transaction> transactions) {
+    public ComptBancaire(Long id, String iban, Double solde, String devise, Utilisateur utilisateur, String dateOuverture, List<Transaction> transactions) {
         this.id = id;
         this.iban = iban;
         this.solde = solde;
         this.devise = devise;
         this.utilisateur = utilisateur;
         this.dateOuverture = dateOuverture;
-        this.ageNcpHash = ageNcpHash;
+
         this.transactions = transactions;
     }
 
@@ -99,13 +97,9 @@ public class ComptBancaire {
         this.dateOuverture = dateOuverture;
     }
 
-    public String getAgeNcpHash() {
-        return ageNcpHash;
-    }
 
-    public void setAgeNcpHash(String ageNcpHash) {
-        this.ageNcpHash = ageNcpHash;
-    }
+
+
 
 
 

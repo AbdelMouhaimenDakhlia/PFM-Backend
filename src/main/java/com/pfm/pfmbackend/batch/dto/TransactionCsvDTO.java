@@ -7,8 +7,9 @@ public class TransactionCsvDTO {
     private String bhLib;   // libellé (ex: Salaire)
     private String dco;     // date opération (ex: 2024-12-01)
     private Double mon;     // montant (ex: 2500.00)
-    private String sen;     // source ou entité (ex: EntrepriseA)
+    private String sen;     // type (c credite ,d debit)
     private String iban;    // compte (ex: TN5900...)
+
 
     private String categorie;  // prédite par l'API
 
