@@ -37,7 +37,7 @@ public class TransactionItemProcessor implements ItemProcessor<TransactionCsvDTO
             String response = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
             scanner.close();
 
-            System.out.println("🧪 API Response: " + response);
+            // System.out.println("🧪 API Response: " + response);
 
             JsonNode jsonNode = mapper.readTree(response);
             JsonNode categoryNode = jsonNode.get("categorie_predite");
