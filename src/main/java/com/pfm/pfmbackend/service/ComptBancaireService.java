@@ -45,5 +45,20 @@ public class ComptBancaireService {
     }
 
 
+    public List<ComptBancaire> listerComptesParEmail(String email) {
+        Utilisateur user = utilisateurRepository.findByEmail(email).orElseThrow();
+        return comptBancaireRepository.findByUtilisateur(user);
+    }
+
+    public double calculerSoldeTotal(String email) {
+        Utilisateur user = utilisateurRepository.findByEmail(email).orElseThrow();
+        return comptBancaireRepository.findByUtilisateur(user)
+                .stream()
+                .mapToDouble(ComptBancaire::getSolde)
+                .sum();
+    }
+
+
+
 }
 

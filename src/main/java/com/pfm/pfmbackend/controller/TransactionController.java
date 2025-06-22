@@ -5,9 +5,11 @@ import com.pfm.pfmbackend.service.TransactionService;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/transactions")
@@ -36,4 +38,36 @@ public class TransactionController {
         List<Transaction> transactions = transactionService.listerToutesLesTransactions();
         return ResponseEntity.ok(transactions);
     }
+
+    @GetMapping("/recentes")
+    public ResponseEntity<List<Transaction>> getDernieresTransactions(Authentication authentication) {
+        String email = authentication.getName();
+        List<Transaction> transactions = transactionService.getDernieresTransactions(email);
+        return ResponseEntity.ok(transactions);
+    }
+
+    @GetMapping("/stats")
+    public ResponseEntity<?> getDepensesParCategorie(Authentication authentication) {
+        String email = authentication.getName();
+        var stats = transactionService.getDepensesParCategorie(email);
+        return ResponseEntity.ok(stats);
+    }
+
+    @GetMapping("/monthly")
+    public ResponseEntity<List<Map<String, Object>>> getMonthlyTransactions(Authentication authentication) {
+        String email = authentication.getName(); // ou un champ dans ton principal
+        return ResponseEntity.ok(transactionService.getMonthlyTransactionSummary(email));
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<List<Transaction>> getMyTransactions(Authentication authentication) {
+        String email = authentication.getName();
+        List<Transaction> transactions = transactionService.getMyTransactions(email);
+        return ResponseEntity.ok(transactions);
+    }
+
+
+
+
+
 }

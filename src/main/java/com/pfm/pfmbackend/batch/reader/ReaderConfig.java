@@ -22,7 +22,7 @@ public class ReaderConfig {
                 .name("transactionItemReader")
                 .resource(new FileSystemResource(filePath))
                 .delimited()
-                .names("bhLib", "dco", "mon", "sen", "iban")
+                .names("bhLib","dco", "mon", "sen", "iban","produit")
                 .fieldSetMapper(new BeanWrapperFieldSetMapper<>() {{
                     setTargetType(TransactionCsvDTO.class);
                 }})

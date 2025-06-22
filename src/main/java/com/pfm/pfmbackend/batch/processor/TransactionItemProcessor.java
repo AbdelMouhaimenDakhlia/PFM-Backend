@@ -21,7 +21,7 @@ public class TransactionItemProcessor implements ItemProcessor<TransactionCsvDTO
         String description = item.getBhLib();
 
         try {
-            URL url = new URL("http://127.0.0.1:5000/predict");
+            URL url = new URL("http://127.0.0.1:5000/class");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/json");

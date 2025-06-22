@@ -9,6 +9,8 @@ public class TransactionCsvDTO {
     private Double mon;     // montant (ex: 2500.00)
     private String sen;     // type (c credite ,d debit)
     private String iban;    // compte (ex: TN5900...)
+    private String produit;
+
 
 
     private String categorie;  // prédite par l'API
@@ -16,6 +18,14 @@ public class TransactionCsvDTO {
     // GETTERS & SETTERS
     public String getBhLib() { return bhLib; }
     public void setBhLib(String bhLib) { this.bhLib = bhLib; }
+
+    public String getProduit() {
+        return produit;
+    }
+
+    public void setProduit(String produit) {
+        this.produit = produit;
+    }
 
     public String getDco() { return dco; }
     public void setDco(String dco) { this.dco = dco; }

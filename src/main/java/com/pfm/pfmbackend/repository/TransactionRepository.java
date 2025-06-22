@@ -26,6 +26,30 @@ public interface TransactionRepository extends JpaRepository<Transaction, Long> 
     );
 
 
+    List<Transaction> findByCompteBancaireInOrderByDateDesc(List<ComptBancaire> comptes);
+    List<Transaction> findByCompteBancaireIn(List<ComptBancaire> comptes);
+    @Query(value = "SELECT * FROM ( " +
+            "SELECT t.* FROM TRANSACTION t " +
+            "WHERE t.compt_id IN :comptes " +
+            "ORDER BY t.date_trans DESC " +
+            ") WHERE ROWNUM <= 5", nativeQuery = true)
+    List<Transaction> findTop5ByCompteIdIn(@Param("comptes") List<Long> compteIds);
+
+
+    @Query(value = "SELECT TO_CHAR(t.date_trans, 'YYYY-MM') AS mois, SUM(t.montant) AS total " +
+            "FROM transaction t " +
+            "JOIN compt_bancaire cb ON t.compt_id = cb.id " +
+            "JOIN utilisateur u ON cb.user_id = u.id " +
+            "WHERE u.email = :email " +
+            "GROUP BY TO_CHAR(t.date_trans, 'YYYY-MM') " +
+            "ORDER BY mois DESC", nativeQuery = true)
+    List<Object[]> getMonthlyTotals(@Param("email") String email);
+
+
+
+
+
+
 
 }
 

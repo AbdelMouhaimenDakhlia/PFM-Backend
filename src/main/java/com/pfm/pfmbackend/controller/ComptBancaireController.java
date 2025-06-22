@@ -4,6 +4,7 @@ import com.pfm.pfmbackend.model.ComptBancaire;
 import com.pfm.pfmbackend.service.ComptBancaireService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,4 +44,22 @@ public class ComptBancaireController {
     public Optional<Long> findMaxId() {
         return comptBancaireService.findMaxId();
     }
+
+
+    @GetMapping("/me")
+    public ResponseEntity<List<ComptBancaire>> getMesComptes(Authentication authentication) {
+        String email = authentication.getName();
+        List<ComptBancaire> comptes = comptBancaireService.listerComptesParEmail(email);
+        return ResponseEntity.ok(comptes);
+    }
+
+    @GetMapping("/solde/total")
+    public ResponseEntity<Double> getSoldeTotal(Authentication authentication) {
+        String email = authentication.getName();
+        double total = comptBancaireService.calculerSoldeTotal(email);
+        return ResponseEntity.ok(total);
+    }
+
+
+
 }

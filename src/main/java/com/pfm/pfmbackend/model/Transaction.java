@@ -25,7 +25,8 @@ public class Transaction {
     @Column(name = "DATE_TRANS")
     private LocalDate date;
 
-
+    @Column(name = "PRODUIT")
+    private String produit;
 
     @Column(name = "TYPE")
     private String type; // "Crédit" ou "Débit"
@@ -40,11 +41,12 @@ public class Transaction {
 
     public Transaction() {}
 
-    public Transaction(Double montant, String description, LocalDate date, String type, String categorie, ComptBancaire compteBancaire) {
+    public Transaction(Double montant, String description,String produit, LocalDate date, String type, String categorie, ComptBancaire compteBancaire) {
         this.montant = montant;
         this.description = description;
         this.date = date;
         this.type = type;
+        this.produit = produit;
         this.categorie = categorie;
         this.compteBancaire = compteBancaire;
     }
@@ -64,6 +66,13 @@ public class Transaction {
     public void setMontant(Double montant) {
         this.montant = montant;
     }
+
+    public String getProduit() {return produit;}
+
+    public void setProduit(String produit) {
+        this.produit = produit;
+    }
+
 
     public String getDescription() {
         return description;

@@ -72,11 +72,12 @@ public class TransactionJpaWriter implements ItemWriter<TransactionCsvDTO> {
                 transaction.setDate(parsedDate);
                 transaction.setCategorie(dto.getCategorie());
                 transaction.setCompteBancaire(compte);
+                transaction.setProduit(dto.getProduit());
 
                 transactionRepo.save(transaction);
 
-                logger.info("✅ Transaction insérée pour IBAN {} | Montant: {} | Catégorie: {} | Date: {} | Type: {}",
-                        dto.getIban(), dto.getMon(), dto.getCategorie(), transaction.getDate(), transaction.getType());
+                logger.info("✅ Transaction insérée pour IBAN {} | Montant: {} | Catégorie: {} | Date: {} | Type: {} | Produit: {}",
+                        dto.getIban(), dto.getMon(), dto.getCategorie(), transaction.getDate(), transaction.getType(), transaction.getProduit());
 
                 success++;
             } catch (Exception e) {
